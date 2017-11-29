@@ -1,0 +1,116 @@
+:root {
+  --date-label-background: #c0392b;
+}
+
+/** ************************************************************************************************************
+    News Grid Styles
+ */
+.news-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  grid-gap: 20px;
+}
+
+@media only screen and (min-width: 500px) {
+  .news-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .item-1 {
+    grid-column: 1/ span 2;
+  }
+  .item-1 .card h1 {
+    font-size: 40px;
+  }
+}
+
+@media only screen and (min-width: 850px) {
+  .news-grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+/** ************************************************************************************************************
+    Card
+ */
+
+/* card */
+.card {
+  min-height: 100%;
+  background: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: #444;
+  position: relative;
+  top: 0;
+  transition: all 0.1s ease-in;
+}
+
+.card:hover {
+  top: -2px;
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
+}
+
+.card article {
+  padding: 20px;
+  display: flex;
+
+  flex: 1;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.card .thumb {
+  padding-bottom: 60%;
+  background-size: cover;
+  background-position: center center;
+}
+.card .date {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: var(--date-label-background);
+  color: white;
+  width: 55px;
+  height: 55px;
+  padding: 10px 0 12.5px 0;
+  border-radius: 100%;
+  font-weight: 700;
+  text-align: center;
+  box-sizing: border-box;
+}
+.card .date .day {
+  font-size: 1.2rem;
+}
+.card .date .month {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+}
+.card article p {
+  flex: 1; /* make p grow to fill available space */
+  line-height: 1.4;
+}
+
+/* typography */
+.card article h1 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+  color: #333;
+}
+
+.card article span {
+  font-size: 12px;
+  font-weight: bold;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 2em 0 0 0;
+}
+
+/* typography fix */
+.news-grid .card:nth-child(1) article h1 {
+  line-height: 1;
+}

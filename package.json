@@ -1,0 +1,24 @@
+{
+  "name": "frontcamp_3_gomel",
+  "version": "1.0.0",
+  "description": "Frontcamp 3 Hometask 2 Babel",
+  "main": "index.js",
+  "scripts": {
+    "build": "./node_modules/.bin/babel ./src/js --source-maps --out-dir ./dist/js",
+    "watch": "./node_modules/.bin/babel ./src/js --watch --source-maps --out-dir ./dist/js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaseopea/fcamp_2.git"
+  },
+  "author": "Vitali Rusau",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kaseopea/fcamp_2/issues"
+  },
+  "homepage": "https://github.com/kaseopea/fcamp_2#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1"
+  }
+}
