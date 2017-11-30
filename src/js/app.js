@@ -24,19 +24,6 @@ newsClient.getNewsSources()
 	.then((data) => {
 		appView.hideElement(ELEMENTS.loader);
 		appView.setView(ELEMENTS.sourcesContent, CONTROLLER.getSourcesHtml(data));
-
-		// add EventListener for sources click
-		ELEMENTS.sourcesContent.addEventListener('click', (ev) => {
-			if (appView.isMobileView()) {
-				appView.hideElement(ELEMENTS.sourcesContent);
-			}
-			let sourceId = (ev.target.dataset && ev.target.dataset.sourceId) ? ev.target.dataset.sourceId : null;
-			if (sourceId) {
-				appView.resetView(ELEMENTS.mainContent);
-				appView.showElement(ELEMENTS.loader);
-				loadNewsBySourceId(sourceId);
-			}
-		})
 	})
 	.catch((err) => {
 		appView.hideElement(ELEMENTS.loader);
@@ -44,16 +31,29 @@ newsClient.getNewsSources()
 		appView.setView(ELEMENTS.errorMessage, CLIENT_MESSAGES.error.noSourcesLoaded);
 	});
 
+function openSource(sourceId) {
+	if (appView.isMobileView()) {
+		appView.hideElement(ELEMENTS.sourcesContent);
+	}
+
+	if (sourceId) {
+		appView.resetView(ELEMENTS.mainContent);
+		appView.showElement(ELEMENTS.loader);
+		loadNewsBySourceId(sourceId);
+	}
+}
+
 // Logo click
-ELEMENTS.logo.addEventListener('click', (ev) => {
+function openIndex() {
 	loadDefaultNews(DEFAULT_KEYWORS);
-});
+}
 
 // Mobile Menu Button
-ELEMENTS.menuButton.addEventListener('click', () => {
+function toggleMenu() {
 	appView.isHidden(ELEMENTS.sourcesContent) ?
-		appView.showElement(ELEMENTS.sourcesContent): appView.hideElement(ELEMENTS.sourcesContent);
-});
+	appView.showElement(ELEMENTS.sourcesContent): appView.hideElement(ELEMENTS.sourcesContent);
+}
+
 window.addEventListener('resize', () => {
 	if (!appView.isMobileView()) {
 		appView.showElement(ELEMENTS.sourcesContent);

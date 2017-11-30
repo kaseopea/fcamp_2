@@ -16,15 +16,20 @@
 
 /* Menu Button */
 .menu-button {
+  border: 0;
+  background: transparent;
   cursor: pointer;
   position: relative;
   top: 3px;
+  width: 3.8rem;
+  height: 3rem;
 
   .icon {
     width: $header-menu-size;
   }
 }
 
+/***************** Media Queries ****************/
 @media only screen and (min-width: 1024px) {
   /* Logo */
   .logo {

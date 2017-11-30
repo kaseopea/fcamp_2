@@ -19,31 +19,32 @@
     <link rel="stylesheet" href="src/styles/style.css">
 </head>
 <body>
-    <aside id="sources">
-        <header id="header">
-            <div class="menu-button">
+    <div id="sources">
+        <div id="header">
+            <button class="menu-button" onclick="toggleMenu()">
                 <img src="src/assets/menu-button.svg" class="icon">
+            </button>
+            
+            <div class="logo" onclick="openIndex()">
+                News <span class="logo-alt">Hole</span>
             </div>
-            <div class="logo">News
-                <span class="logo-alt">Hole</span>
-            </div>
-        </header>
+        </div>
         <div id="sources-content"></div>
-    </aside>
+    </div>
 
-    <main id="main">
+    <div id="main">
         <div id="loader">
             <img src="src/assets/loader.svg" class="loader-svg" alt="Loading...">
         </div>
         <div id="main-content"></div>
         <div class="error-message"></div>
-    </main>
+    </div>
 
-    <footer id="footer">
+    <div id="footer">
         <p class="copyright">Special thanks goes to
             <a href="https://newsapi.org/" target="_blank">NewsAPI</a>
         </p>
-    </footer>
+    </div>
 
     <!-- Polyfills -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js"></script>

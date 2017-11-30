@@ -2,12 +2,9 @@
     Card
  */
 .card {
-  min-height: 100%;
+  display: block;
   background: white;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  text-decoration: none;
   color: #444;
   position: relative;
   top: 0;
@@ -19,20 +16,20 @@
   }
 }
 
-.card article {
+.card .card-info {
   padding: 20px;
-  display: flex;
-
-  flex: 1;
-  justify-content: space-between;
-  flex-direction: column;
 
   /* typography */
-  h1 {
+  .card-info-title {
     font-size: 20px;
     font-weight: 700;
     margin: 0;
     color: #333;
+    text-decoration: none;
+
+    &:hover {
+      color: lighten(#333, 20%);
+    }
   }
 
   span {
@@ -52,9 +49,15 @@
 
 /* Thumbnail */
 .card .thumb {
-  padding-bottom: 60%;
-  background-size: cover;
-  background-position: center center;
+  min-height: 150px;
+
+  a {
+    text-decoration: none;
+  }
+  .thumb-pic {
+    width: 100%;
+    border: 0;
+  }
 }
 
 /* Date */
