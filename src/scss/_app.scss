@@ -1,0 +1,36 @@
+/** ************************************************************************************************************
+    General styles
+ */
+html {
+  background-color: $main-background-color;
+  font-family: "Kanit", Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.25;
+  -webkit-font-smoothing: antialiased;
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Loader */
+#loader {
+  text-align: center;
+  width: $loader-size;
+  margin: 0 auto;
+
+  .loader-svg {
+    width: $loader-size;
+  }
+}
+
+/* Error message */
+.error-message {
+  display: none;
+  width: 90%;
+  margin: 0 auto;
+  background-color: #e74c3c;
+  color: $error-message-text;
+  padding: 1em 2em;
+  border-radius: 5px;
+}

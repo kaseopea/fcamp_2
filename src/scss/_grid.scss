@@ -1,0 +1,28 @@
+/** ************************************************************************************************************
+    News Grid Styles
+ */
+.news-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  grid-gap: 20px;
+}
+
+@media only screen and (min-width: 500px) {
+  .news-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .item-1 {
+    grid-column: 1/ span 2;
+  }
+  .item-1 .card h1 {
+    font-size: 40px;
+  }
+}
+
+@media only screen and (min-width: 850px) {
+  .news-grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}

@@ -1,0 +1,70 @@
+/** ************************************************************************************************************
+    Aside styles
+ */
+#sources {
+  position: fixed;
+  width: 100%;
+  height: auto;
+  background-color: $aside-background;
+  box-shadow: 5px 0 15px 0 rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+#sources-content {
+  display: none;
+}
+@media only screen and (min-width: 1024px) {
+  #main {
+    margin-left: $aside-width;
+    padding-top: 2em;
+  }
+  #sources {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: $aside-width;
+    height: 100%;
+    box-shadow: 5px 0 15px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  #sources-content {
+    display: block;
+    height: calc(100% - #{$header-height});
+    overflow: auto;
+  }
+}
+
+/** ************************************************************************************************************
+    SOURCES LIST
+ */
+.sources-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    margin: 5px 0;
+    padding: 0.5em 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $aside-background-hover;
+    }
+
+    a {
+      color: $aside-link-color;
+      font-weight: 300;
+      padding-right: 10px;
+    }
+
+    .icon {
+      width: 16px;
+      height: 16px;
+      display: block;
+      margin: 10px;
+      overflow: hidden;
+    }
+  }
+}
