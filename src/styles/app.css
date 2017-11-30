@@ -51,7 +51,7 @@ body {
 	display: none;
 	width: 90%;
 	margin: 0 auto;
-	background-color: var(--error-message-background);
+	background-color: #e74c3c;
 	color: var(--error-message-text);
 	padding: 1em 2em;
 	border-radius: 5px;
