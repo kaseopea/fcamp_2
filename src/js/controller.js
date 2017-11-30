@@ -34,7 +34,7 @@ const getNewsHtml = (data) => {
             <article>
               <h1>${newsOne.title}</h1>
               ${ (index > 1) ? `<p>${newsOne.description.substring(0,NEWS_DESCRIPTION_LIMIT)}...</p>` : ''}
-              <span>${newsOne.author}</span>
+              ${ (newsOne.author) ? `<span>${newsOne.author}` : ''}</span>
             </article>
           </a>
     </div>
