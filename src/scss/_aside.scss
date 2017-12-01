@@ -9,6 +9,7 @@
   z-index: 10;
 }
 #sources-content {
+  display: none;
   position: absolute;
   width: 100%;
   height: calc(100% - #{$header-height});

@@ -3,7 +3,7 @@ const getSourcesHtml = (data) => {
     return;
   }
 	let sources = data.map((source) => {
-		return `<li onclick="openSource('${source.id}')" data-source-id="${source.id}">
+		return `<li onclick="app.openSource('${source.id}')" data-source-id="${source.id}">
                 <a data-source-id="${source.id}" title="${source.name}">
                 <img data-source-id="${source.id}" alt="${source.name}" class="icon" src="https://icons.better-idea.org/icon?url=${source.url}&amp;size=16..32..48"> <span class="link-text">${source.name}</span></a>
             </li>`;

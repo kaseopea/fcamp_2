@@ -20,3 +20,17 @@ const DEFAULT_KEYWORS = [
 
 /* GENERAL SETTINGS */
 const MOBILE_BREAKPOINT = 1024;
+
+
+/* ElEMENTS & SELECTORS */
+const ELEMENTS = {
+	sourcesContent: document.getElementById('sources-content'),
+	loader: document.getElementById('loader'),
+	mainContent: document.getElementById('main-content'),
+	errorMessage: document.querySelector('.error-message'),
+	logo: document.querySelector('.logo'),
+	menuButton: document.querySelector('.menu-button')
+};
+const SELECTORS = {
+	menuExpanded: 'menu-expanded'
+};
