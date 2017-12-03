@@ -1,14 +1,10 @@
-# https://git-scm.com/docs/gitignore
-# https://help.github.com/articles/ignoring-files
-# Example .gitignore files: https://github.com/github/gitignore
 /bower_components/
 /node_modules/
 /dist/
 
-# Babel plugn
+# Babel plugin exclude
 !*/!node_modules/babel-plugin-process-env/package.json
 !*/!node_modules/babel-plugin-process-env/index.js
-
 
 
 # Created by https://www.gitignore.io/api/webstorm,visualstudiocode
