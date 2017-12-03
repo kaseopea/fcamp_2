@@ -25,7 +25,6 @@ body {
 
 /* Error message */
 .error-message {
-  display: none;
   width: 90%;
   margin: 0 auto;
   background-color: #e74c3c;
@@ -167,7 +166,7 @@ body.menu-expanded {
     margin: 0;
     padding: 1.25rem;
     cursor: pointer;
-    border-bottom: 1px solid #3e5871; }
+    border-bottom: 1px solid #3e5771; }
     .sources-list li:hover {
       background-color: #34495e; }
     .sources-list li a {

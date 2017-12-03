@@ -11,8 +11,8 @@ class App {
   init() {
     this.initNewsSources();
     this._loadDefaultNews(DEFAULT_KEYWORS);
-	this._initResizeEventListener();
-	this._initMainMenu();
+	  this._initResizeEventListener();
+	  this._initMainMenu();
   }
 
   /* Load news sources to aside */
@@ -29,10 +29,9 @@ class App {
       })
       .catch(err => {
         appView.hideElement(ELEMENTS.loader);
-        appView.showElement(ELEMENTS.errorMessage);
         appView.setView(
-          ELEMENTS.errorMessage,
-          CLIENT_MESSAGES.error.noSourcesLoaded
+          ELEMENTS.mainContent,
+          this._getErrorMarkup(CLIENT_MESSAGES.error.noSourcesLoaded)
         );
       });
   }
@@ -90,10 +89,9 @@ class App {
       })
       .catch(err => {
         appView.hideElement(ELEMENTS.loader);
-        appView.showElement(ELEMENTS.errorMessage);
         appView.setView(
-          ELEMENTS.errorMessage,
-          CLIENT_MESSAGES.error.noNewsLoaded
+          ELEMENTS.mainContent,
+          this._getErrorMarkup(CLIENT_MESSAGES.error.noNewsLoaded)
         );
       });
   }
@@ -121,11 +119,15 @@ class App {
       })
       .catch(err => {
         appView.hideElement(ELEMENTS.loader);
-        appView.showElement(ELEMENTS.errorMessage);
         appView.setView(
-          ELEMENTS.errorMessage,
-          CLIENT_MESSAGES.error.noNewsLoaded
+          ELEMENTS.mainContent,
+          this._getErrorMarkup(CLIENT_MESSAGES.error.noNewsLoaded)
         );
       });
+  }
+
+  /* Get Error Markup */
+  _getErrorMarkup(message) {
+    return ` <div class="error-message">${message}</div>`
   }
 }
