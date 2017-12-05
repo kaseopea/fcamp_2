@@ -4,8 +4,7 @@
   "description": "Frontcamp 3 Hometask 2 Babel",
   "main": "index.js",
   "scripts": {
-    "start:dev": "node_modules/.bin/webpack-dev-server --color",
-    "wp:dev": "node_modules/.bin/webpack --color",
+    "start": "node_modules/.bin/webpack-dev-server --color",
     "build-prod": "NODE_ENV='prod' && node_modules/.bin/webpack  --colors",
     "build": "NODE_ENV='dev' && node_modules/.bin/webpack  --colors"
   },

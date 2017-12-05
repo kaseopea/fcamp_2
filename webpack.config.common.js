@@ -4,10 +4,14 @@ const GoogleFontsPlugin = require("google-fonts-webpack-plugin");
 const path = require('path');
 
 const OPTIONS = {
-    distPath: path.resolve(__dirname, 'dist'),
-    devServerPort: 9000
+    distPath: path.resolve(__dirname, 'dist')
 };
-
+const DEV_SERVER_CONFIG = {
+    contentBase: OPTIONS.distPath,
+    port: 9000,
+    open: true
+    // stats: 'errors-only'
+};
 /* ---------------------------------- CSS EXTRACT PLUGIN  ---------------------------------- */
 const extractSASSPlugin = new ExtractTextPlugin({
     filename: 'style.css'
@@ -37,11 +41,7 @@ module.exports = {
         filename: 'app.js'
     },
     devtool: "source-map",
-    devServer: {
-        contentBase: OPTIONS.distPath,
-        port: OPTIONS.devServerPort,
-        open: true
-    },
+    devServer: DEV_SERVER_CONFIG,
     watch: true,
     watchOptions: {
         aggregateTimeout: 100,
