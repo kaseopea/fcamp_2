@@ -11,3 +11,7 @@
 * Used a Babel polyfill to use Promises. (https://babeljs.io/docs/usage/polyfill/)
 * Used a window.fetch JavaScript polyfill. (http://github.github.io/fetch/)
 
+## Additional
+Installed **ESLint** (with Aitbnb config) and **jscs**
+[eslint with airbnb config](https://www.themarketingtechnologist.co/eslint-with-airbnb-javascript-style-guide-in-webstorm/)
+[jscs config](https://www.themarketingtechnologist.co/how-to-get-airbnbs-javascript-code-style-working-in-webstorm/)

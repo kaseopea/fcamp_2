@@ -38,6 +38,6 @@ class Renderer {
     return Math.max(document.documentElement.clientWidth, window.innerWidth || 0) <= MOBILE_BREAKPOINT;
   }
 }
-const VIEW = (() => ({
+export const VIEW = (() => ({
   Renderer
 }))();

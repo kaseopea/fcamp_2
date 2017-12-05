@@ -1,6 +1,12 @@
 {
   "parser": "babel-eslint",
   "extends": "airbnb-base",
+  "globals": {
+    "window": true,
+    "document": true
+  },
   "rules": {
+    "import/prefer-default-export": "off",
+    "comma-dangle": 0
   }
 }

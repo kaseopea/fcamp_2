@@ -1,3 +1,11 @@
+import { CLIENT_MESSAGES } from './const/messages';
+import { NewsClient } from './newsClient/client';
+import { VIEW } from './view';
+import { CONTROLLER } from './controller';
+import { DEFAULT_KEYWORS } from './const/defaultKeywords';
+import { ELEMENTS, SELECTORS } from './const/elements';
+import { NEWSAPI_API_KEY } from './const/apiKey';
+
 // Check if NewsClient is defined on the page
 if (!NewsClient) {
   throw new Error(CLIENT_MESSAGES.error.noNewsClientDefined);
@@ -6,35 +14,34 @@ if (!NewsClient) {
 const newsClient = new NewsClient.NewsAPIClient(NEWSAPI_API_KEY);
 const appView = new VIEW.Renderer();
 
-class App {
-  /* init */
+export class App {
   init() {
     this.initNewsSources();
-    this._loadDefaultNews(DEFAULT_KEYWORS);
-	  this._initResizeEventListener();
-	  this._initMainMenu();
+    this.loadDefaultNews(DEFAULT_KEYWORS);
+    this.initResizeEventListener();
+    this.initMainMenu();
   }
 
   /* ************ VIEW ACTIONS ************ */
   initNewsSources() {
     newsClient
       .getNewsSources()
-      .then(data => {
+      .then((data) => {
         appView.hideElement(ELEMENTS.loader);
         appView.setView(
           ELEMENTS.sourcesContent,
-          CONTROLLER.getSourcesHtml(data)
+          CONTROLLER.getSourcesHtml(data),
         );
       })
-      .catch(err => {
+      .catch(() => {
         appView.hideElement(ELEMENTS.loader);
         appView.setView(
           ELEMENTS.mainContent,
-          this._getErrorMarkup(CLIENT_MESSAGES.error.noSourcesLoaded)
+          this.getErrorMarkup(CLIENT_MESSAGES.error.noSourcesLoaded)
         );
       });
   }
-  
+
   openSource(sourceId) {
     if (appView.isMobileView()) {
       appView.hideElement(ELEMENTS.sourcesContent);
@@ -43,7 +50,7 @@ class App {
     if (sourceId) {
       appView.resetView(ELEMENTS.mainContent);
       appView.showElement(ELEMENTS.loader);
-      this._loadNewsBySourceId(sourceId);
+      this.loadNewsBySourceId(sourceId);
     }
   }
 
@@ -53,7 +60,7 @@ class App {
   }
 
   // Mobile Menu Button
-  toggleMenu() {
+  static toggleMenu() {
     if (appView.isHidden(ELEMENTS.sourcesContent)) {
       appView.showElement(ELEMENTS.sourcesContent);
       appView.addClass(document.body, SELECTORS.menuExpanded);
@@ -66,40 +73,40 @@ class App {
   /* ************ UTILS (Private) ************ */
 
   /* init menu */
-  _initMainMenu() {
-	if (appView.isMobileView() && !appView.isHidden(ELEMENTS.sourcesContent)) {
-		appView.addClass(document.body, SELECTORS.menuExpanded);
+  static initMainMenu() {
+    if (appView.isMobileView() && !appView.isHidden(ELEMENTS.sourcesContent)) {
+      appView.addClass(document.body, SELECTORS.menuExpanded);
     }
   }
 
   /* Load default news on startup */
-  _loadDefaultNews(keywords) {
-    let query = keywords[Math.floor(Math.random() * keywords.length)];
+  loadDefaultNews(keywords) {
+    const query = keywords[Math.floor(Math.random() * keywords.length)];
 
     appView.resetView(ELEMENTS.mainContent);
     appView.showElement(ELEMENTS.loader);
 
     newsClient
-      .getNewsByParam("q", query)
-      .then(data => {
+      .getNewsByParam('q', query)
+      .then((data) => {
         appView.hideElement(ELEMENTS.loader);
         appView.setView(ELEMENTS.mainContent, CONTROLLER.getNewsHtml(data));
       })
-      .catch(err => {
+      .catch(() => {
         appView.hideElement(ELEMENTS.loader);
         appView.setView(
           ELEMENTS.mainContent,
-          this._getErrorMarkup(CLIENT_MESSAGES.error.noNewsLoaded)
+          this.getErrorMarkup(CLIENT_MESSAGES.error.noNewsLoaded)
         );
       });
   }
 
   /* InitResizeEventListener */
-  _initResizeEventListener() {
-    window.addEventListener("resize", () => {
+  static initResizeEventListener() {
+    window.addEventListener('resize', () => {
       if (appView.isMobileView()) {
-		appView.hideElement(ELEMENTS.sourcesContent);
-		appView.removeClass(document.body, SELECTORS.menuExpanded);
+        appView.hideElement(ELEMENTS.sourcesContent);
+        appView.removeClass(document.body, SELECTORS.menuExpanded);
       } else {
         appView.showElement(ELEMENTS.sourcesContent);
       }
@@ -107,25 +114,25 @@ class App {
   }
 
   /* Load news by source id */
-  _loadNewsBySourceId(sourceId) {
-	appView.removeClass(document.body, SELECTORS.menuExpanded);
+  loadNewsBySourceId(sourceId) {
+    appView.removeClass(document.body, SELECTORS.menuExpanded);
     newsClient
-      .getNewsByParam("sources", sourceId)
-      .then(data => {
+      .getNewsByParam('sources', sourceId)
+      .then((data) => {
         appView.hideElement(ELEMENTS.loader);
         appView.setView(ELEMENTS.mainContent, CONTROLLER.getNewsHtml(data));
       })
-      .catch(err => {
+      .catch(() => {
         appView.hideElement(ELEMENTS.loader);
         appView.setView(
           ELEMENTS.mainContent,
-          this._getErrorMarkup(CLIENT_MESSAGES.error.noNewsLoaded)
+          this.getErrorMarkup(CLIENT_MESSAGES.error.noNewsLoaded)
         );
       });
   }
 
   /* Get Error Markup */
-  _getErrorMarkup(message) {
-    return ` <div class="error-message">${message}</div>`
+  static getErrorMarkup(message) {
+    return `<div class="error-message">${message}</div>`;
   }
 }
