@@ -3,10 +3,12 @@
   "extends": "airbnb-base",
   "globals": {
     "window": true,
-    "document": true
+    "document": true,
+    "fetch": true
   },
   "rules": {
     "import/prefer-default-export": "off",
-    "comma-dangle": 0
+    "comma-dangle": 0,
+    "no-param-reassign": ["error", { "props": false }]
   }
 }

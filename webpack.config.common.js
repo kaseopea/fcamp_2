@@ -8,8 +8,8 @@ const OPTIONS = {
 };
 const DEV_SERVER_CONFIG = {
     contentBase: OPTIONS.distPath,
-    port: 9000,
-    open: true
+    port: 9000
+    // open: true
     // stats: 'errors-only'
 };
 /* ---------------------------------- CSS EXTRACT PLUGIN  ---------------------------------- */

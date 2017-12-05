@@ -1,43 +1,56 @@
+import { APP_CONST } from './const/general';
+
 class Renderer {
   // Show element
-  showElement(element) {
-    return element ? (element.style.display = "block") : null;
+  static showElement(element) {
+    if (element) {
+      element.style.display = 'block';
+    }
   }
 
   // Hide element
-  hideElement(element) {
-    return element ? (element.style.display = "none") : null;
+  static hideElement(element) {
+    if (element) {
+      element.style.display = 'none';
+    }
   }
 
   // Render content to specific element
-  setView(element, content) {
-    return element ? (element.innerHTML = content) : null;
+  static setView(element, content) {
+    if (element) {
+      element.innerHTML.display = content;
+    }
   }
 
   // Reset content of specific element
-  resetView(element) {
-    return element ? (element.innerHTML = "") : null;
+  static resetView(element) {
+    if (element) {
+      element.innerHTML.display = '';
+    }
   }
 
   // Add class
-  addClass(element, className) {
+  static addClass(element, className) {
     return element.classList.add(className);
   }
+
   // Remove class
-  removeClass(element, className) {
+  static removeClass(element, className) {
     return element.classList.remove(className);
   }
 
   // Check if element is hidden
-  isHidden(element) {
-    return window.getComputedStyle(element).display === "none";
+  static isHidden(element) {
+    return window.getComputedStyle(element).display === 'none';
   }
 
   // check if view is mobile
-  isMobileView() {
-    return Math.max(document.documentElement.clientWidth, window.innerWidth || 0) <= MOBILE_BREAKPOINT;
+  static isMobileView() {
+    const viewportW = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    return viewportW <= APP_CONST.mobileBreakpoint;
   }
 }
+
 export const VIEW = (() => ({
   Renderer
 }))();
