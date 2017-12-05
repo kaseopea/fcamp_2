@@ -1,6 +1,6 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpack = require('webpack');
+const GoogleFontsPlugin = require("google-fonts-webpack-plugin");
 const path = require('path');
 
 const OPTIONS = {
@@ -8,12 +8,33 @@ const OPTIONS = {
     devServerPort: 9000
 };
 
+/* ---------------------------------- CSS EXTRACT PLUGIN  ---------------------------------- */
+const extractSASSPlugin = new ExtractTextPlugin({
+    filename: 'style.css'
+});
+/* ---------------------------------- INDEX PAGE ---------------------------------- */
+const IndexPagePlugin = new HtmlWebpackPlugin({
+    template: './src/index.html'
+});
+
+/* ---------------------------------- GOOGLE WEB FONTS ---------------------------------- */
+const GoogleWebFontsPlugin = new GoogleFontsPlugin({
+    fonts: [
+        {family: "Montserrat", variants: ["700", "900"]},
+        {family: "Roboto", variants: ["400", "700"]}
+    ],
+    name: 'fonts',
+    filename: 'fonts.css',
+    path: 'fonts/',
+    formats: ["woff", "woff2"]
+});
+
+/* ---------------------------------- MAIN CONFIG ---------------------------------- */
 module.exports = {
     entry: './src/js/index.js',
     output: {
         path: OPTIONS.distPath,
-        filename: 'app.js',
-        publicPath: 'dist/'
+        filename: 'app.js'
     },
     devtool: "source-map",
     devServer: {
@@ -21,31 +42,36 @@ module.exports = {
         port: OPTIONS.devServerPort,
         open: true
     },
+    watch: true,
+    watchOptions: {
+        aggregateTimeout: 100,
+    },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.(html)$/,
-                loader: 'html-loader'
+                use: 'html-loader'
             },
             {
                 test: /\.scss/,
-                loader: ExtractTextPlugin.extract('style-loader', 'css!sass')
+                use: extractSASSPlugin.extract(['css-loader', 'sass-loader'])
+            },
+            {
+                test: /\.js$/,
+                enforce: 'pre',
+                exclude: /(node_modules|bower_components)/,
+                use: 'eslint-loader'
             },
             {
                 test: /\.js$/,
                 exclude: /(node_modules|bower_components)/,
-                loader: 'babel-loader'
+                use: 'babel-loader'
             },
             {
                 test: /\.(png|jpg|svg)$/,
-                loader: 'file-loader?name=assets/[name].[ext]&publicPath=./'
+                use: 'file-loader?name=assets/[name].[ext]&publicPath=./'
             }
         ]
     },
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: 'src/index.html'
-        }),
-        new ExtractTextPlugin('styles.css')
-    ]
+    plugins: [IndexPagePlugin, extractSASSPlugin, GoogleWebFontsPlugin]
 };

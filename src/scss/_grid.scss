@@ -1,0 +1,56 @@
+/** ************************************************************************************************************
+    News Grid Styles
+ */
+.news-grid {
+  margin-left: -1rem;
+  margin-right: -1rem;
+
+  .grid-item {
+    width: 100%;
+    float: left;
+    
+  }
+  .grid-item-inner {
+    padding: 1.5rem 1rem;
+  }
+}
+
+
+@media screen and (min-width: 768px) {
+  .news-grid .grid-item {
+    width: 50%;
+
+    &:nth-of-type(2n + 1) {
+      clear: left;
+    }
+  }
+
+}
+
+@media screen and (min-width: 1024px) {
+  .news-grid .grid-item {
+    width: 33.3333%;
+
+    &:nth-of-type(2n + 1) {
+      clear: none;
+    }
+
+    &:nth-of-type(3n + 1) {
+      clear: left;
+    }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .news-grid .grid-item {
+    width: 25%;
+
+    &:nth-of-type(3n + 1) {
+      clear: none;
+    }
+
+    &:nth-of-type(4n + 1) {
+      clear: left;
+    }
+  }
+}

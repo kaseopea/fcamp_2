@@ -1,5 +1,5 @@
-const ENV = {
-    prod: 'prod',
-    dev: 'dev'
+const CONFIGS = {
+    dev: './webpack.config.dev',
+    prod: './webpack.config.prod'
 };
-module.exports = process.env.NODE_ENV === ENV.prod ? require('./webpack.config.prod') : require('./webpack.config.dev');
+module.exports =  require((process.env.NODE_ENV === 'prod') ? CONFIGS.dev: CONFIGS.prod);
