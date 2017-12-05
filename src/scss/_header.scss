@@ -1,0 +1,59 @@
+/** ************************************************************************************************************
+    Header styles
+ */
+#header {
+  background-color: $header-background-color;
+  text-align: center;
+  width: 100%;
+  height: $header-height;
+  line-height: $header-height;
+}
+
+/* Logo */
+.logo {
+  display: none;
+}
+
+/* Menu Button */
+.menu-button {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  top: 3px;
+  width: 3.8rem;
+  height: 3rem;
+
+  .icon {
+    width: $header-menu-size;
+  }
+}
+
+body.menu-expanded {
+  overflow: hidden;
+}
+
+/***************** Media Queries ****************/
+@media only screen and (min-width: 1024px) {
+  /* Logo */
+  .logo {
+    display: block;
+    font-family: "Kanit", Arial, Helvetica, sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: $logo-text-color;
+    cursor: pointer;
+
+    .logo-alt {
+      display: inline-block;
+      margin: 0 3px 0 8px;
+      padding: 3px 5px;
+      color: $logo-text-color-alt;
+    }
+  }
+
+  .menu-button {
+    display: none;
+  }
+}

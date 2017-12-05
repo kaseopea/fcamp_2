@@ -19,6 +19,15 @@ class Renderer {
     return element ? (element.innerHTML = "") : null;
   }
 
+  // Add class
+  addClass(element, className) {
+    return element.classList.add(className);
+  }
+  // Remove class
+  removeClass(element, className) {
+    return element.classList.remove(className);
+  }
+
   // Check if element is hidden
   isHidden(element) {
     return window.getComputedStyle(element).display === "none";

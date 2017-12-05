@@ -1,0 +1,50 @@
+/** ************************************************************************************************************
+    General styles
+ */
+html {
+  background-color: $main-background-color;
+  font-family: "Kanit", Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.25;
+  -webkit-font-smoothing: antialiased;
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Loader */
+#loader {
+  text-align: center;
+  width: $loader-size;
+  margin: 0 auto;
+
+  .loader-svg {
+    width: $loader-size;
+  }
+}
+
+/* Error message */
+.error-message {
+  width: 90%;
+  margin: 0 auto;
+  background-color: #e74c3c;
+  color: $error-message-text;
+  padding: 1em 2em;
+  border-radius: 5px;
+}
+
+/* Clearfix */
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+.clearfix { display: inline-block; }
+/* start commented backslash hack \*/
+* html .clearfix { height: 1%; }
+.clearfix { display: block; }
+/* close commented backslash hack */

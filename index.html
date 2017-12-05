@@ -16,49 +16,47 @@
     <link href="https://fonts.googleapis.com/css?family=Kanit:300,400,700,900" rel="stylesheet">
 
     <!-- App styles -->
-    <link rel="stylesheet" href="src/styles/app.css">
-    <link rel="stylesheet" href="src/styles/grid.css">
+    <link rel="stylesheet" href="src/styles/style.css">
 </head>
-
 <body>
-
-
-    <aside id="sources">
-        <header id="header">
-            <div class="menu-button">
+    <div id="sources">
+        <div id="header">
+            <button class="menu-button" onclick="app.toggleMenu()">
                 <img src="src/assets/menu-button.svg" class="icon">
+            </button>
+            
+            <div class="logo" onclick="app.openIndex()">
+                News <span class="logo-alt">Hole</span>
             </div>
-            <div class="logo">News
-                <span class="logo-alt">Hole</span>
-            </div>
-        </header>
+        </div>
         <div id="sources-content"></div>
-    </aside>
+    </div>
 
-    <main id="main">
+    <div id="main">
         <div id="loader">
             <img src="src/assets/loader.svg" class="loader-svg" alt="Loading...">
         </div>
         <div id="main-content"></div>
-        <div class="error-message"></div>
-    </main>
+    </div>
 
-    <footer id="footer">
+    <div id="footer">
         <p class="copyright">Special thanks goes to
             <a href="https://newsapi.org/" target="_blank">NewsAPI</a>
         </p>
-    </footer>
+    </div>
 
-    <!-- App scripts -->
+    <!-- Polyfills -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.min.js"></script>
 
+    <!-- App scripts -->
     <script src="dist/js/newsClient/client_config.js"></script>
     <script src="dist/js/newsClient/client.js"></script>
     <script src="dist/js/config.js"></script>
     <script src="dist/js/controller.js"></script>
     <script src="dist/js/view.js"></script>
     <script src="dist/js/app.js"></script>
+    <script src="dist/js/index.js"></script>
 </body>
 
 </html>

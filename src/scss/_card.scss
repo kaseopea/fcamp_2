@@ -1,0 +1,91 @@
+/** ************************************************************************************************************
+    Card
+ */
+.card {
+  display: block;
+  background: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  color: #444;
+  position: relative;
+  top: 0;
+  transition: all 0.1s ease-in;
+
+  &:hover {
+    top: -2px;
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.card .card-info {
+  padding: 20px;
+
+  /* typography */
+  .card-info-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+    color: #333;
+    text-decoration: none;
+
+    &:hover {
+      color: lighten(#333, 20%);
+    }
+  }
+
+  span {
+    font-size: 12px;
+    font-weight: bold;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 2em 0 0 0;
+  }
+
+  p {
+    flex: 1; /* make p grow to fill available space */
+    line-height: 1.4;
+  }
+}
+
+/* Thumbnail */
+.card .thumb {
+  min-height: 150px;
+
+  a {
+    text-decoration: none;
+  }
+  .thumb-pic {
+    width: 100%;
+    border: 0;
+  }
+}
+
+/* Date */
+.card .date {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: $date-label-background;
+  color: white;
+  width: 55px;
+  height: 55px;
+  padding: 10px 0 12.5px 0;
+  border-radius: 100%;
+  font-weight: 700;
+  text-align: center;
+  box-sizing: border-box;
+
+  .day {
+    font-size: 1.2rem;
+  }
+
+  .month {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+  }
+}
+
+/* typography fix */
+.news-grid .card:nth-child(1) article h1 {
+  line-height: 1;
+}
