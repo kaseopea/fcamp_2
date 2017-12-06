@@ -1,6 +1,7 @@
 import { APP_CONST } from './const/general';
+import { ELEMENTS } from './const/elements';
 
-class Renderer {
+export class ViewRenderer {
   // Show element
   static showElement(element) {
     if (element) {
@@ -18,14 +19,14 @@ class Renderer {
   // Render content to specific element
   static setView(element, content) {
     if (element) {
-      element.innerHTML.display = content;
+      element.innerHTML = content;
     }
   }
 
   // Reset content of specific element
   static resetView(element) {
     if (element) {
-      element.innerHTML.display = '';
+      element.innerHTML = '';
     }
   }
 
@@ -49,8 +50,15 @@ class Renderer {
     const viewportW = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     return viewportW <= APP_CONST.mobileBreakpoint;
   }
-}
 
-export const VIEW = (() => ({
-  Renderer
-}))();
+  // Mobile Menu Button
+  static toggleMenu() {
+    if (ViewRenderer.isHidden(ELEMENTS.sourcesContent)) {
+      ViewRenderer.showElement(ELEMENTS.sourcesContent);
+      ViewRenderer.addClass(document.body, ELEMENTS.menuExpandedClass);
+    } else {
+      ViewRenderer.hideElement(ELEMENTS.sourcesContent);
+      ViewRenderer.removeClass(document.body, ELEMENTS.menuExpandedClass);
+    }
+  }
+}

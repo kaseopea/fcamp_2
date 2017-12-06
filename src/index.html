@@ -12,8 +12,8 @@
     <link rel="dns-prefetch" href="//icons.better-idea.org">
 
     <!-- Preload css -->
-    <link rel="preload" href="fonts.css">
-    <link rel="preload" href="style.css">
+    <link rel="preload" as="style" href="fonts.css">
+    <link rel="preload" as="style" href="style.css">
 
     <!-- App styles -->
     <link rel="stylesheet" href="fonts.css">
@@ -23,10 +23,10 @@
 <body>
     <div id="sources">
         <div id="header">
-            <button class="menu-button" onclick="app.toggleMenu()">
+            <button class="menu-button" onclick="ViewRenderer.toggleMenu()">
                 <img src="assets/menu-button.svg" class="icon">
             </button>
-            <div class="logo" onclick="app.openIndex()">
+            <div class="logo">
                 News <span class="logo-alt">Hole</span>
             </div>
         </div>

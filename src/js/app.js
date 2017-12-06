@@ -1,81 +1,75 @@
-import { CLIENT_MESSAGES } from './const/messages';
-import { NewsClient } from './newsClient/client';
-import { VIEW } from './view';
-import { CONTROLLER } from './controller';
-import { DEFAULT_KEYWORS } from './const/defaultKeywords';
-import { ELEMENTS, SELECTORS } from './const/elements';
+import { ViewRenderer } from './view';
+import { Controller } from './controller';
+import { NewsAPIClient } from './newsClient/client';
 import { NEWSAPI_API_KEY } from './const/apiKey';
-
-// Check if NewsClient is defined on the page
-if (!NewsClient) {
-  throw new Error(CLIENT_MESSAGES.error.noNewsClientDefined);
-}
-
-const newsClient = new NewsClient.NewsAPIClient(NEWSAPI_API_KEY);
-const appView = new VIEW.Renderer();
+import { CLIENT_MESSAGES } from './const/messages';
+import { DEFAULT_KEYWORS } from './const/defaultKeywords';
+import { ELEMENTS } from './const/elements';
 
 export class App {
+
+  constructor() {
+    this.newsClient = new NewsAPIClient(NEWSAPI_API_KEY);
+  }
+
   init() {
     this.initNewsSources();
     this.loadDefaultNews(DEFAULT_KEYWORS);
-    this.initResizeEventListener();
-    this.initMainMenu();
+    App.initResizeEventListener();
+    App.initMainMenu();
+
+    ELEMENTS.logo.addEventListener('click', this.logoClickHandler.bind(this));
   }
 
-  /* ************ VIEW ACTIONS ************ */
+  /* ************************ VIEW ACTIONS ************************ */
   initNewsSources() {
-    newsClient
+    this.newsClient
       .getNewsSources()
       .then((data) => {
-        appView.hideElement(ELEMENTS.loader);
-        appView.setView(
+        ViewRenderer.hideElement(ELEMENTS.loader);
+        ViewRenderer.setView(
           ELEMENTS.sourcesContent,
-          CONTROLLER.getSourcesHtml(data),
+          Controller.getSourcesHtml(data),
         );
+
+        ELEMENTS.sourcesList[0].addEventListener('click', this.sourceListClickHandler.bind(this));
       })
       .catch(() => {
-        appView.hideElement(ELEMENTS.loader);
-        appView.setView(
+        ViewRenderer.hideElement(ELEMENTS.loader);
+        ViewRenderer.setView(
           ELEMENTS.mainContent,
-          this.getErrorMarkup(CLIENT_MESSAGES.error.noSourcesLoaded)
+          App.getErrorMarkup(CLIENT_MESSAGES.error.noSourcesLoaded)
         );
       });
   }
 
   openSource(sourceId) {
-    if (appView.isMobileView()) {
-      appView.hideElement(ELEMENTS.sourcesContent);
+    if (ViewRenderer.isMobileView()) {
+      ViewRenderer.hideElement(ELEMENTS.sourcesContent);
     }
 
     if (sourceId) {
-      appView.resetView(ELEMENTS.mainContent);
-      appView.showElement(ELEMENTS.loader);
+      ViewRenderer.resetView(ELEMENTS.mainContent);
+      ViewRenderer.showElement(ELEMENTS.loader);
       this.loadNewsBySourceId(sourceId);
     }
   }
 
-  // Logo click
-  openIndex() {
+  logoClickHandler() {
     this.loadDefaultNews(DEFAULT_KEYWORS);
   }
 
-  // Mobile Menu Button
-  static toggleMenu() {
-    if (appView.isHidden(ELEMENTS.sourcesContent)) {
-      appView.showElement(ELEMENTS.sourcesContent);
-      appView.addClass(document.body, SELECTORS.menuExpanded);
-    } else {
-      appView.hideElement(ELEMENTS.sourcesContent);
-      appView.removeClass(document.body, SELECTORS.menuExpanded);
-    }
+  sourceListClickHandler(event) {
+    this.openSource(event.target.getAttribute('data-source-id'));
+    event.stopPropagation();
   }
 
-  /* ************ UTILS (Private) ************ */
+  /* ************************ UTILS (Private) ************************ */
 
   /* init menu */
   static initMainMenu() {
-    if (appView.isMobileView() && !appView.isHidden(ELEMENTS.sourcesContent)) {
-      appView.addClass(document.body, SELECTORS.menuExpanded);
+    if (ViewRenderer.isMobileView() && !ViewRenderer.isHidden(ELEMENTS.sourcesContent)) {
+      ViewRenderer.addClass(document.body, ELEMENTS.menuExpandedClass);
     }
   }
 
@@ -83,20 +77,20 @@ export class App {
   loadDefaultNews(keywords) {
     const query = keywords[Math.floor(Math.random() * keywords.length)];
 
-    appView.resetView(ELEMENTS.mainContent);
-    appView.showElement(ELEMENTS.loader);
+    ViewRenderer.resetView(ELEMENTS.mainContent);
+    ViewRenderer.showElement(ELEMENTS.loader);
 
-    newsClient
+    this.newsClient
       .getNewsByParam('q', query)
       .then((data) => {
-        appView.hideElement(ELEMENTS.loader);
-        appView.setView(ELEMENTS.mainContent, CONTROLLER.getNewsHtml(data));
+        ViewRenderer.hideElement(ELEMENTS.loader);
+        ViewRenderer.setView(ELEMENTS.mainContent, Controller.getNewsHtml(data));
       })
       .catch(() => {
-        appView.hideElement(ELEMENTS.loader);
-        appView.setView(
+        ViewRenderer.hideElement(ELEMENTS.loader);
+        ViewRenderer.setView(
           ELEMENTS.mainContent,
-          this.getErrorMarkup(CLIENT_MESSAGES.error.noNewsLoaded)
+          App.getErrorMarkup(CLIENT_MESSAGES.error.noNewsLoaded)
         );
       });
   }
@@ -104,29 +98,29 @@ export class App {
   /* InitResizeEventListener */
   static initResizeEventListener() {
     window.addEventListener('resize', () => {
-      if (appView.isMobileView()) {
-        appView.hideElement(ELEMENTS.sourcesContent);
-        appView.removeClass(document.body, SELECTORS.menuExpanded);
+      if (ViewRenderer.isMobileView()) {
+        ViewRenderer.hideElement(ELEMENTS.sourcesContent);
+        ViewRenderer.removeClass(document.body, ELEMENTS.menuExpandedClass);
       } else {
-        appView.showElement(ELEMENTS.sourcesContent);
+        ViewRenderer.showElement(ELEMENTS.sourcesContent);
       }
     });
   }
 
   /* Load news by source id */
   loadNewsBySourceId(sourceId) {
-    appView.removeClass(document.body, SELECTORS.menuExpanded);
-    newsClient
+    ViewRenderer.removeClass(document.body, ELEMENTS.menuExpandedClass);
+    this.newsClient
       .getNewsByParam('sources', sourceId)
       .then((data) => {
-        appView.hideElement(ELEMENTS.loader);
-        appView.setView(ELEMENTS.mainContent, CONTROLLER.getNewsHtml(data));
+        ViewRenderer.hideElement(ELEMENTS.loader);
+        ViewRenderer.setView(ELEMENTS.mainContent, Controller.getNewsHtml(data));
       })
       .catch(() => {
-        appView.hideElement(ELEMENTS.loader);
-        appView.setView(
+        ViewRenderer.hideElement(ELEMENTS.loader);
+        ViewRenderer.setView(
           ELEMENTS.mainContent,
-          this.getErrorMarkup(CLIENT_MESSAGES.error.noNewsLoaded)
+          App.getErrorMarkup(CLIENT_MESSAGES.error.noNewsLoaded)
         );
       });
   }
