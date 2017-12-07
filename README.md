@@ -15,3 +15,6 @@
 Installed **ESLint** (with Aitbnb config) and **jscs**
 [eslint with airbnb config](https://www.themarketingtechnologist.co/eslint-with-airbnb-javascript-style-guide-in-webstorm/)
 [jscs config](https://www.themarketingtechnologist.co/how-to-get-airbnbs-javascript-code-style-working-in-webstorm/)
+
+Fetch browser polyfill
+https://www.npmjs.com/package/whatwg-fetch

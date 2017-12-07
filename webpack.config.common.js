@@ -35,10 +35,13 @@ const GoogleWebFontsPlugin = new GoogleFontsPlugin({
 
 /* ---------------------------------- MAIN CONFIG ---------------------------------- */
 module.exports = {
-  entry: './src/js/index.js',
+  entry: {
+    app: './src/js/index.js',
+    vendor: ['babel-polyfill', 'whatwg-fetch']
+  },
   output: {
     path: OPTIONS.distPath,
-    filename: 'app.js'
+    filename: '[name].js'
   },
   devtool: 'source-map',
   devServer: DEV_SERVER_CONFIG,
