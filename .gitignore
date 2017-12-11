@@ -5,3 +5,12 @@
 /node_modules/
 /dist/
 /.idea/
+
+
+# Babel plugin exclude
+!*/!node_modules/babel-plugin-process-env/package.json
+!*/!node_modules/babel-plugin-process-env/index.js
+
+# Webpack plugin exclude
+!*/!node_modules/webpack-remove-number-attrs-loader/package.json
+!*/!node_modules/webpack-remove-number-attrs-loader/index.js

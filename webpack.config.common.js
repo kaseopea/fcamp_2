@@ -18,7 +18,8 @@ const extractSASSPlugin = new ExtractTextPlugin({
 });
 /* ---------------------------------- INDEX PAGE ---------------------------------- */
 const IndexPagePlugin = new HtmlWebpackPlugin({
-  template: './src/index.html'
+  template: './src/index.html',
+  excludeChunks: ['viewer']
 });
 
 /* ---------------------------------- GOOGLE WEB FONTS ---------------------------------- */
@@ -37,7 +38,8 @@ const GoogleWebFontsPlugin = new GoogleFontsPlugin({
 module.exports = {
   entry: {
     app: './src/js/index.js',
-    vendor: ['babel-polyfill', 'whatwg-fetch']
+    vendor: ['babel-polyfill', 'whatwg-fetch'],
+    viewer: './src/js/contentViewer/index.js'
   },
   output: {
     path: OPTIONS.distPath,
@@ -53,7 +55,7 @@ module.exports = {
     rules: [
       {
         test: /\.(html)$/,
-        use: 'html-loader'
+        use: 'html-loader',
       },
       {
         test: /\.scss/,
@@ -71,7 +73,24 @@ module.exports = {
         use: 'babel-loader'
       },
       {
-        test: /\.(png|jpg|svg)$/,
+        test: /\.json$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'json/[name].[ext]'
+            }
+          },
+          {
+            loader: 'json-loader'
+          },
+          {
+            loader: 'webpack-remove-number-attrs-loader'
+          }
+        ]
+      },
+      {
+        test: /\.(png|jpg|svg|ico)$/,
         use: 'file-loader?name=assets/[name].[ext]&publicPath=./'
       }
     ]

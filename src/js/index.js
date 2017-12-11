@@ -1,4 +1,5 @@
 /* Require styles */
+import '../json/data.json';
 import '../scss/style.scss';
 import { App } from './app';
 

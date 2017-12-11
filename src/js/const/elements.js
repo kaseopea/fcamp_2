@@ -6,6 +6,7 @@ export const ELEMENTS = {
   errorMessage: document.querySelector('.error-message'),
   logo: document.querySelector('.logo'),
   menuButton: document.querySelector('.menu-button'),
-  menuExpandedClass: 'menu-expanded'
+  menuExpandedClass: 'menu-expanded',
+  testButton: document.getElementById('test-button')
 };
 

@@ -22,7 +22,10 @@ export class NewsAPIClient {
         [param]: value
       })))
         .then(response => response.json())
-        .then(data => resolve(data.articles))
+        .then(data => {
+          const dataWithIds = NewsAPIClient.injectIds(data.articles);
+          resolve(dataWithIds);
+        })
         .catch(err => reject(err.message));
     });
   }
@@ -33,5 +36,14 @@ export class NewsAPIClient {
     params.apikey = this.apikey;
     Object.keys(params).forEach(key => paramsObj.push(`${key}=${encodeURIComponent(params[key])}`));
     return `${url}?${paramsObj.join('&')}`;
+  }
+
+  static injectIds(data) {
+    let indexId = 0;
+    return data.map(item => {
+      indexId += 1;
+      item.id = indexId;
+      return item;
+    });
   }
 }

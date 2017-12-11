@@ -26,8 +26,7 @@ export class Controller {
     if (!data.length) {
       return '';
     }
-
-    const { source: { name: sourceTitle = '' } } = data[0];
+    const { source: { name: sourceTitle = ''} } = data[0];
 
     const news = data.map((newsOne, index) => {
       const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -35,7 +34,7 @@ export class Controller {
       return `<div class="grid-item item-${index + 1}">
         <div class="grid-item-inner">
         
-        <div class="card">
+        <div class="card" data-article-id="${newsOne.id}">
             <div class="thumb">
               ${(date && APP_CONST.newsShowDateLabel) ? `<div class="date">
                 <div class="day">${date.getDate()}</div>
@@ -48,7 +47,7 @@ export class Controller {
 
             <article class="card-info">
               <a href="${newsOne.url}" class="card-info-title" target="_blank">${newsOne.title}</a>
-              <p class="card-info-desc">${newsOne.description.substring(0, APP_CONST.newsDescriptionLimit)}...</p>
+              ${(newsOne.description) ? `<p class="card-info-desc">${newsOne.description.substring(0, APP_CONST.newsDescriptionLimit)}...</p>` : ''}
               ${(newsOne.author) ? `<span class="card-info-author">${newsOne.author.substring(0, APP_CONST.newsAuthorLimit)}` : ''}</span>
             </article>
 

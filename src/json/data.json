@@ -1,0 +1,8 @@
+{
+  "test": "string",
+  "testNumber": 100,
+  "obj": {
+    "string": "string",
+    "number": 200
+  }
+}

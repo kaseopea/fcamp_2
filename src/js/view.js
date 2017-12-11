@@ -1,7 +1,7 @@
 import { APP_CONST } from './const/general';
-import { ELEMENTS } from './const/elements';
 
 export class ViewRenderer {
+
   // Show element
   static showElement(element) {
     if (element) {
@@ -49,16 +49,5 @@ export class ViewRenderer {
   static isMobileView() {
     const viewportW = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     return viewportW <= APP_CONST.mobileBreakpoint;
-  }
-
-  // Mobile Menu Button
-  static toggleMenu() {
-    if (ViewRenderer.isHidden(ELEMENTS.sourcesContent)) {
-      ViewRenderer.showElement(ELEMENTS.sourcesContent);
-      ViewRenderer.addClass(document.body, ELEMENTS.menuExpandedClass);
-    } else {
-      ViewRenderer.hideElement(ELEMENTS.sourcesContent);
-      ViewRenderer.removeClass(document.body, ELEMENTS.menuExpandedClass);
-    }
   }
 }
